@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    しばらくお待ち下さい...
+    <script>
+      function checkOut() {
+        const checkinId = getCookie("sessionToken");
+
+        fetch(
+          "https://script.google.com/macros/s/AKfycbyULbKzai6KYhNbPm9uQbwin3ylgMvzvxS-MhZsUCcaPRI0MJickCsS7Eb9rI0fizuF/exec",
+          {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "checkout",
+              checkinId: checkinId,
+            }),
+          }
+        )
+          .then((response) => response.text())
+          .then((data) => console.log(data))
+          .catch((error) => console.error("Error:", error))
+          .finally(() => {
+            window.location.href = "/";
+          });
+      }
+
+      function getCookie(name) {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; ${name}=`);
+        if (parts.length === 2) return parts.pop().split(";").shift();
+      }
+
+      // ページがロードされたらチェックアウト処理を実行
+      window.onload = checkOut;
+    </script>
+  </body>
+</html>

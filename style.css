@@ -1,0 +1,10 @@
+body {
+  font-family: Yu Gothic, Arial, sans-serif;
+  text-align: center;
+  padding-top: 50px;
+}
+
+#counter-display {
+  font-size: 2em;
+  margin-bottom: 20px;
+}

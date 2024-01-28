@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    しばらくお待ち下さい...
+    <script>
+      function checkIn() {
+        const checkinId = generateRandomString();
+        document.cookie = "sessionToken=" + checkinId + ";path=/";
+
+        fetch(
+          "https://script.google.com/macros/s/AKfycbyULbKzai6KYhNbPm9uQbwin3ylgMvzvxS-MhZsUCcaPRI0MJickCsS7Eb9rI0fizuF/exec",
+          {
+            method: "POST",
+            body: new URLSearchParams({
+              action: "checkin",
+              checkinId: checkinId,
+            }),
+          }
+        )
+          .then((response) => response.text())
+          .then((data) => console.log(data))
+          .catch((error) => console.error("Error:", error))
+          .finally(() => {
+            window.location.href = "/";
+          });
+      }
+
+      function generateRandomString() {
+        return (
+          Math.random().toString(36).substring(2, 15) +
+          Math.random().toString(36).substring(2, 15)
+        );
+      }
+
+      // ページがロードされたらチェックイン処理を実行
+      window.onload = checkIn;
+    </script>
+  </body>
+</html>
