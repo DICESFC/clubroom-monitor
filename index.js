@@ -27,12 +27,12 @@ document.addEventListener("DOMContentLoaded", function () {
       console.log(data);
       console.log("action:", action);
 
-      // 入室/退室時は人数と入室確認をごまかす
+      // 入室/退室時、アクションとデータが一致しない場合は人数をごまかす
       // GASの実行がとても遅いため、マクロの実行完了を待たずリダイレクトしている
-      if (action === "checkin") {
+      if (action === "checkin" && !data.isUserInRoom) {
         data.count += 1;
         data.isUserInRoom = true;
-      } else if (action === "checkout") {
+      } else if (action === "checkout" && data.isUserInRoom) {
         data.count -= 1;
         data.isUserInRoom = false;
       }
