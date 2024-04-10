@@ -2,12 +2,17 @@
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    しばらくお待ち下さい...
+    <div class="loading-container">
+      <div class="spinner"></div>
+      <span>退室しています...</span>
+    </div>
     <script>
       function checkOut() {
         const checkinId = getCookie("sessionToken");
+        document.cookie = "";
 
         fetch(
           "https://script.google.com/macros/s/AKfycbyULbKzai6KYhNbPm9uQbwin3ylgMvzvxS-MhZsUCcaPRI0MJickCsS7Eb9rI0fizuF/exec",
@@ -21,10 +26,12 @@
         )
           .then((response) => response.text())
           .then((data) => console.log(data))
-          .catch((error) => console.error("Error:", error))
-          .finally(() => {
-            window.location.href = "./";
-          });
+          .catch((error) => console.error("Error:", error));
+
+        // 結果を待たずにリダイレクトする
+        setTimeout(() => {
+          window.location.href = "./";
+        }, 500);
       }
 
       function getCookie(name) {
