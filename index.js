@@ -25,6 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      console.log("action:", action);
 
       // 入室/退室時は人数と入室確認をごまかす
       // GASの実行がとても遅いため、マクロの実行完了を待たずリダイレクトしている
