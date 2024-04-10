@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
         : "部室に人は居ません";
 
       // ローディングアニメーションを削除
-      const spinner = document.querySelector(".spinner");
+      const spinner = document.querySelector(".loading-container");
       if (spinner) {
         spinner.remove();
       }
