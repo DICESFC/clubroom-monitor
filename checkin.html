@@ -30,9 +30,7 @@
           .catch((error) => console.error("Error:", error));
 
         // 結果を待たずにリダイレクトする
-        setTimeout(() => {
-          window.location.href = "./";
-        }, 1000);
+        window.location.href = "./?action=checkin";
       }
 
       function generateRandomString() {

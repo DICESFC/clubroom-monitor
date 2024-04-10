@@ -7,6 +7,16 @@ document.addEventListener("DOMContentLoaded", function () {
   checkinButton.style.display = "none";
   checkoutButton.style.display = "none";
 
+  // URLからクエリパラメータを取得する
+  const params = new URLSearchParams(window.location.search);
+  const action = params.get("action");
+
+  // URLからクエリパラメータを削除
+  if (window.location.search) {
+    const urlWithoutParams = window.location.pathname;
+    window.history.replaceState({}, document.title, urlWithoutParams);
+  }
+
   fetch(
     "https://script.google.com/macros/s/AKfycbyULbKzai6KYhNbPm9uQbwin3ylgMvzvxS-MhZsUCcaPRI0MJickCsS7Eb9rI0fizuF/exec" +
       "?checkinId=" +
@@ -15,9 +25,19 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      document.getElementById("counter").textContent = data.count
-        ? `部室に${data.count}人います`
-        : "部室に人は居ません";
+
+      // 入室/退室時は人数と入室確認をごまかす
+      // GASの実行がとても遅いため、マクロの実行完了を待たずリダイレクトしている
+      if (action === "checkin") {
+        data.count += 1;
+        data.isUserInRoom = true;
+      } else if (action === "checkout") {
+        data.count -= 1;
+        data.isUserInRoom = false;
+      }
+
+      document.getElementById("counter").textContent =
+        data.count > 0 ? `部室に${data.count}人います` : "部室に人は居ません";
 
       // ローディングアニメーションを削除
       const spinner = document.querySelector(".loading-container");
