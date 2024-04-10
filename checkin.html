@@ -8,10 +8,7 @@
     <link rel="icon" href="public/favicon.ico" />
   </head>
   <body>
-    <div class="loading-container">
-      <div class="spinner"></div>
-      <span>入室しています...</span>
-    </div>
+    <span>入室しています...</span>
     <script>
       function checkIn() {
         const checkinId = getCookie("sessionToken") || generateRandomString();
