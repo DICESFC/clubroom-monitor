@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   fetch(
-    "https://script.google.com/macros/s/AKfycbyULbKzai6KYhNbPm9uQbwin3ylgMvzvxS-MhZsUCcaPRI0MJickCsS7Eb9rI0fizuF/exec" +
+    "https://script.google.com/macros/s/AKfycbyj13Abml7yTlOMa3DFKbcRZlOGBxc1aKwbmAGLOQYPWWcRFVlXdEtT-P47H5rxVLeo/exec" +
       "?checkinId=" +
       checkinId
   )
