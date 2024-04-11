@@ -18,6 +18,9 @@
           "https://script.google.com/macros/s/AKfycbz8PXR_-nk_vMm5eDZMRF60rrBkvgvbMItKq1cjdBRt6TRyO9mqDhak6CkduW9PlHQy/exec",
           {
             method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
             body: new URLSearchParams({
               action: "checkout",
               checkinId: checkinId,
